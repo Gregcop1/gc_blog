@@ -1,0 +1,58 @@
+plugin.tx_gcblog_pi1 {
+	config {
+		#CODE dertermine what to display, possible values : list, single, search
+		CODE = sDEF|lDEF|CODE|vDEF
+		CODE.ifEmpty = postList
+
+		pidList = 1
+		recursive = 10
+		
+		templateFile = EXT:gc_blog/res/template.html
+		
+		orderBy = sorting ASC
+	}
+	
+	displayCat {
+		markers {
+			TITLE = TEXT
+			TITLE.field = title
+			TITLE.stdWrap.typolink{
+				parameter.data = page:uid
+				additionalParams = &tx_gcblog_pi1[category]={field:uid}
+				additionalParams.insertData = 1
+			}
+
+			PARAMS = COA
+			PARAMS {
+				wrap = class="|"
+
+				10 = TEXT
+				10.wrap = cat-item|
+
+				20 = TEXT
+				20{
+					field = uid
+					noTrimWrap =  | cat-item-|
+				}
+
+				30 = TEXT
+				30{
+					value = current-cat
+					if{
+						value = {field:uid}
+						value.insertData = 1
+						equals.data = TSFE:gc_blog|current|category
+					}
+					noTrimWrap =  | |
+				}
+			}
+		}
+	}
+	
+	displaySingle {
+		markers {
+		}
+	}
+}
+
+

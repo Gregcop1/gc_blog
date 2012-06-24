@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'in_directory'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Blog - Category list</label>
+			<label index="tx_gcblog_category">Category</label>
+			<label index="tx_gcblog_tag">Tag</label>
+			<label index="tx_gcblog_post">Post</label>
+			<label index="tx_gcblog.title">Title</label>
+			<label index="tx_gcblog.blockComment">Block Comments</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="tt_content.list_type_pi1"><![CDATA[Blog - Liste des catégories]]></label>
+			<label index="tx_gcblog_category"><![CDATA[Catégorie]]></label>
+			<label index="tx_gcblog_tag"><![CDATA[Tag]]></label>
+			<label index="tx_gcblog_post"><![CDATA[Billet]]></label>
+			<label index="tx_gcblog.title"><![CDATA[Titre]]></label>
+			<label index="tx_gcblog.blockComment"><![CDATA[Bloquer les commentaires]]></label>
+		</languageKey>
+	</data>
+</T3locallang>
