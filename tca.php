@@ -8,7 +8,7 @@ $TCA['tx_gcblog_category'] = array (
 	),
 	'feInterface' => $TCA['tx_gcblog_category']['feInterface'],
 	'columns' => array (
-		'sys_language_uid' => array (		
+		'sys_language_uid' => array (
 			'exclude' => 1,
 			'label'  => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
 			'config' => array (
@@ -21,7 +21,7 @@ $TCA['tx_gcblog_category'] = array (
 				)
 			)
 		),
-		'l10n_parent' => array (		
+		'l10n_parent' => array (
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
 			'exclude'     => 1,
 			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
@@ -34,12 +34,12 @@ $TCA['tx_gcblog_category'] = array (
 				'foreign_table_where' => 'AND tx_gcblog_category.pid=###CURRENT_PID### AND tx_gcblog_category.sys_language_uid IN (-1,0)',
 			)
 		),
-		'l10n_diffsource' => array (		
+		'l10n_diffsource' => array (
 			'config' => array (
 				'type' => 'passthrough'
 			)
 		),
-		'hidden' => array (		
+		'hidden' => array (
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
 			'config'  => array (
@@ -47,7 +47,7 @@ $TCA['tx_gcblog_category'] = array (
 				'default' => '0'
 			)
 		),
-		'starttime' => array (		
+		'starttime' => array (
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
 			'config'  => array (
@@ -59,7 +59,7 @@ $TCA['tx_gcblog_category'] = array (
 				'checkbox' => '0'
 			)
 		),
-		'endtime' => array (		
+		'endtime' => array (
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
 			'config'  => array (
@@ -75,18 +75,32 @@ $TCA['tx_gcblog_category'] = array (
 				)
 			)
 		),
-		'title' => array (		
-			'exclude' => 0,		
-			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.title',		
+		'title' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.category.title',
 			'config' => array (
-				'type' => 'input',	
-				'size' => '30',	
+				'type' => 'input',
+				'size' => '30',
 				'eval' => 'required',
+			)
+		),
+		'parent_category' => array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.category.parent_category',
+			'config' => Array (
+				'type' => 'select',
+				'form_type' => 'user',
+				'userFunc' => 'tx_gcblog_TCAform_selectTree->renderCategoryFields',
+				'foreign_table' => 'tx_gcblog_category',
+				'autoSizeMax' => 50,
+				'minitems' => 0,
+				'maxitems' => 500,
+
 			)
 		),
 	),
 	'types' => array (
-		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2')
+		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2,parent_category;;;;2-2-2')
 	),
 	'palettes' => array (
 		'1' => array('showitem' => 'starttime, endtime')
@@ -100,7 +114,7 @@ $TCA['tx_gcblog_tag'] = array (
 	),
 	'feInterface' => $TCA['tx_gcblog_tag']['feInterface'],
 	'columns' => array (
-		'sys_language_uid' => array (		
+		'sys_language_uid' => array (
 			'exclude' => 1,
 			'label'  => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
 			'config' => array (
@@ -113,7 +127,7 @@ $TCA['tx_gcblog_tag'] = array (
 				)
 			)
 		),
-		'l10n_parent' => array (		
+		'l10n_parent' => array (
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
 			'exclude'     => 1,
 			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
@@ -126,12 +140,12 @@ $TCA['tx_gcblog_tag'] = array (
 				'foreign_table_where' => 'AND tx_gcblog_tag.pid=###CURRENT_PID### AND tx_gcblog_tag.sys_language_uid IN (-1,0)',
 			)
 		),
-		'l10n_diffsource' => array (		
+		'l10n_diffsource' => array (
 			'config' => array (
 				'type' => 'passthrough'
 			)
 		),
-		'hidden' => array (		
+		'hidden' => array (
 			'exclude' => 1,
 			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
 			'config'  => array (
@@ -139,12 +153,12 @@ $TCA['tx_gcblog_tag'] = array (
 				'default' => '0'
 			)
 		),
-		'title' => array (		
-			'exclude' => 0,		
-			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.title',		
+		'title' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.tag.title',
 			'config' => array (
-				'type' => 'input',	
-				'size' => '30',	
+				'type' => 'input',
+				'size' => '30',
 				'eval' => 'required',
 			)
 		),

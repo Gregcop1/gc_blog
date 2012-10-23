@@ -16,10 +16,12 @@ CREATE TABLE tx_gcblog_category (
 	starttime int(11) DEFAULT '0' NOT NULL,
 	endtime int(11) DEFAULT '0' NOT NULL,
 	title tinytext,
-	
+  	parent_category int(11) unsigned DEFAULT '0' NOT NULL,
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
+
 CREATE TABLE tx_gcblog_tag (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -32,7 +34,7 @@ CREATE TABLE tx_gcblog_tag (
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
 	title tinytext,
-	
+
 	PRIMARY KEY (uid),
 	KEY parent (pid)
 );
