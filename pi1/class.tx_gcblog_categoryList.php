@@ -72,7 +72,7 @@ class tx_gcblog_categoryList extends tx_gclib_list {
 			 	$this->initStaticQueryParts();
 			 	$this->initFilterQueryParts($item['uid']);
 			 	$results = $this->execQuery( $this->query );
-			 	if(count($results)) {
+			 	if(count($results) && ($this->config['category.']['recursive'] && intval($this->config['category.']['recursive'])>$currentLevel)) {
 				 	$markerArray['###CHILDREN###'] = $this->render( $this->config['templateFile'],
 									'TEMPLATE_CAT',
 									$this->conf['displayCat.'],

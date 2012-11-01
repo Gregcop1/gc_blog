@@ -6,12 +6,16 @@ plugin.tx_gcblog_pi1 {
 
 		pidList = 1
 		recursive = 10
-		
+
+		category {
+			recursive = 100
+		}
+
 		templateFile = EXT:gc_blog/res/template.html
-		
+
 		orderBy = sorting ASC
 	}
-	
+
 	displayCat {
 		markers {
 			TITLE = TEXT
@@ -48,7 +52,7 @@ plugin.tx_gcblog_pi1 {
 			}
 		}
 	}
-	
+
 	displaySingle {
 		markers {
 		}

@@ -6,6 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="configuration.showPostOnBackendPageTree">Show Post on backend page tree</label>
 			<label index="tt_content.list_type_pi1">Blog - Category list</label>
 			<label index="tx_gcblog_category">Category</label>
 			<label index="tx_gcblog_tag">Tag</label>
@@ -16,6 +17,7 @@
 			<label index="tx_gcblog.tag.title">Title</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
+			<label index="configuration.showPostOnBackendPageTree">Montrer les billets dans l'arborescence du Backend</label>
 			<label index="tt_content.list_type_pi1"><![CDATA[Blog - Liste des catégories]]></label>
 			<label index="tx_gcblog_category"><![CDATA[Catégorie]]></label>
 			<label index="tx_gcblog_tag"><![CDATA[Tag]]></label>
