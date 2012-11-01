@@ -4,19 +4,19 @@ if (!defined('TYPO3_MODE')) {
 }
 $TCA['tx_gcblog_category'] = array (
 	'ctrl' => array (
-		'title'     => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_category',		
-		'label'     => 'title',	
+		'title'     => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_category',
+		'label'     => 'title',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'languageField'            => 'sys_language_uid',	
-		'transOrigPointerField'    => 'l10n_parent',	
-		'transOrigDiffSourceField' => 'l10n_diffsource',	
-		'sortby' => 'sorting',	
-		'delete' => 'deleted',	
-		'enablecolumns' => array (		
-			'disabled' => 'hidden',	
-			'starttime' => 'starttime',	
+		'languageField'            => 'sys_language_uid',
+		'transOrigPointerField'    => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
+		'sortby' => 'sorting',
+		'delete' => 'deleted',
+		'enablecolumns' => array (
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
@@ -25,18 +25,18 @@ $TCA['tx_gcblog_category'] = array (
 );
 $TCA['tx_gcblog_tag'] = array (
 	'ctrl' => array (
-		'title'     => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_tag',		
-		'label'     => 'title',	
+		'title'     => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_tag',
+		'label'     => 'title',
 		'tstamp'    => 'tstamp',
 		'crdate'    => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'languageField'            => 'sys_language_uid',	
-		'transOrigPointerField'    => 'l10n_parent',	
-		'transOrigDiffSourceField' => 'l10n_diffsource',	
-		'sortby' => 'title',	
-		'delete' => 'deleted',	
-		'enablecolumns' => array (		
-			'disabled' => 'hidden',	
+		'languageField'            => 'sys_language_uid',
+		'transOrigPointerField'    => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
+		'sortby' => 'title',
+		'delete' => 'deleted',
+		'enablecolumns' => array (
+			'disabled' => 'hidden',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_gcblog_tag.gif',
@@ -44,36 +44,41 @@ $TCA['tx_gcblog_tag'] = array (
 );
 
 $tempColumns = array (
-	'tx_gcblog_category' => array (		
-		'exclude' => 1,		
-		'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_category',		
-		'config'      => array (
-			'type'  => 'select',
-			'items' => array (
-				array('', 0),
-			),
-			'foreign_table'       => 'tx_gcblog_category',
-			'foreign_table_where' => '',
+	'tx_gcblog_category' => array (
+		'exclude' => 1,
+		'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_category',
+		'config' => Array (
+			'type' => 'select',
+			'form_type' => 'user',
+			'userFunc' => 'tx_gclib_TCAform_selectTree->renderTreeFields',
+			'foreign_table' => 'tx_gcblog_category',
+			'back' => 'pages',
+			'labelField' => 'title',
+			'parentField' => 'parent_category',
+			'autoSizeMax' => 50,
+			'minitems' => 0,
+			'maxitems' => 500,
+
 		)
 	),
-	'tx_gcblog_tag' => array (		
-		'exclude' => 1,		
-		'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_tag',		
+	'tx_gcblog_tag' => array (
+		'exclude' => 1,
+		'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_tag',
 		'config'      => array (
 			'type'  => 'group',
 			'items' => array (
 				array('', 0),
 			),
 			"internal_type" => "db",
-            "allowed" => "tx_gcblog_tag",  
-            "size" => 3,   
+            "allowed" => "tx_gcblog_tag",
+            "size" => 3,
             "minitems" => 0,
-            "maxitems" => 20,    
+            "maxitems" => 20,
 		)
 	),
-	'tx_gcblog_blockComment' => array (		
-		'exclude' => 1,		
-		'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.blockComment',		
+	'tx_gcblog_blockComment' => array (
+		'exclude' => 1,
+		'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.blockComment',
 		'config'      => array (
 			'type'  => 'check',
 		)
@@ -115,6 +120,6 @@ t3lib_extMgm::addPlugin(array(
 
 
 // Adding flexform
-$TCA["tt_content"]["types"]["list"]["subtypes_addlist"][$_EXTKEY."_pi1"]="pi_flexform"; 
+$TCA["tt_content"]["types"]["list"]["subtypes_addlist"][$_EXTKEY."_pi1"]="pi_flexform";
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY.'/pi1/flexform.xml');
 ?>

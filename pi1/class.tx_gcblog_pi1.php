@@ -27,7 +27,6 @@
  * Hint: use extdeveval to insert/update function index above.
  */
 
-require_once(t3lib_extMgm::extPath('gc_lib').'class.tx_gclib.php');
 
 
 /**
@@ -41,7 +40,7 @@ class tx_gcblog_pi1 extends tx_gclib {
 	var $prefixId      = 'tx_gcblog_pi1';		// Same as class name
 	var $scriptRelPath = 'pi1/class.tx_gcblog_pi1.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'gc_blog';	// The extension key.
-	
+
 	/**
 	 * The main method of the PlugIn
 	 *
@@ -51,7 +50,7 @@ class tx_gcblog_pi1 extends tx_gclib {
 	 */
 	function main($content,$conf) {
 		parent::main($conf);
-		
+
 		$this->initPlugin();
 
 		$content = '';
@@ -73,45 +72,6 @@ class tx_gcblog_pi1 extends tx_gclib {
 	function initPlugin() {
 		//init array of cats and tag
 		if(!isset($GLOBALS['TSFE']->gc_blog)){
-			//categories
-			$query = array(
-	 	 	 'SELECT' => 'tx_gcblog_category.*',
-	 	 	 'FROM' => 'tx_gcblog_category',
-	 	 	 'WHERE' => '1'
-	 	 	 			. (	$this->config['pidList'] ? ' AND '.'tx_gcblog_category'.'.pid in ('.implode(',', $this->getRecursivePid( $this->config['pidList'], $this->config['recursive'] )).')' : '')
-	 	 	 			. $this->cObj->enableFields('tx_gcblog_category'),
-	 	 	 'GROUP BY' => '',
-	 	 	 'ORDER BY' => 'tx_gcblog_category.title',
-	 	 	 'LIMIT' => ''
-	 	 	 );
-			$GLOBALS['TSFE']->gc_blog['category'] = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-				$query['SELECT'],
-				$query['FROM'],
-				$query['WHERE'],
-				$query['GROUP BY'],
-				$query['ORDER BY'],
-				$query['LIMIT']
-			);
-
-			//tags
-			$query = array(
-	 	 	 'SELECT' => 'tx_gcblog_tag.*',
-	 	 	 'FROM' => 'tx_gcblog_tag',
-	 	 	 'WHERE' => '1'
-	 	 	 			. (	$this->config['pidList'] ? ' AND '.'tx_gcblog_tag'.'.pid in ('.implode(',', $this->getRecursivePid( $this->config['pidList'], $this->config['recursive'] )).')' : '')
-	 	 	 			. $this->cObj->enableFields('tx_gcblog_tag'),
-	 	 	 'GROUP BY' => '',
-	 	 	 'ORDER BY' => 'tx_gcblog_tag.title',
-	 	 	 'LIMIT' => ''
-	 	 	 );
-			$GLOBALS['TSFE']->gc_blog['tag'] = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-				$query['SELECT'],
-				$query['FROM'],
-				$query['WHERE'],
-				$query['GROUP BY'],
-				$query['ORDER BY'],
-				$query['LIMIT']
-			);
 
 			//embedValue
 			if(isset($this->piVars['category'])) {
@@ -124,7 +84,6 @@ class tx_gcblog_pi1 extends tx_gclib {
 						'tag' => $GLOBALS['TSFE']->page['tx_gcblog_tag'],
 					);
 			}
-			//print('<pre style="text-align: left">');print_r($GLOBALS['TSFE']->gc_blog);print('</pre>');
 		}
 	}
 }

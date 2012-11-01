@@ -27,8 +27,6 @@
  * Hint: use extdeveval to insert/update function index above.
  */
 
-require_once(t3lib_extMgm::extPath('gc_lib').'class.tx_gclib_base.php');
-
 
 /**
  * Plugin 'Category List' for the 'gc_blog' extension.
@@ -37,11 +35,11 @@ require_once(t3lib_extMgm::extPath('gc_lib').'class.tx_gclib_base.php');
  * @package	TYPO3
  * @subpackage	tx_gcblog
  */
-class tx_gcblog_categoryList extends tx_gclib_base {
+class tx_gcblog_categoryList extends tx_gclib_list {
 	var $prefixId      = 'tx_gcblog_pi1';		// Same as class name
 	var $scriptRelPath = 'pi1/class.tx_gcblog_categoryList.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'gc_blog';	// The extension key.
-	
+
 	/**
 	 * The main method of the PlugIn
 	 *
@@ -49,10 +47,66 @@ class tx_gcblog_categoryList extends tx_gclib_base {
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	The content that is displayed on the website
 	 */
-	function main($conf) {
-	 	parent::main($conf);
-		
-		return $this->render($this->config['templateFile'], 'TEMPLATE_CAT',  $this->conf['displayCat.'], $GLOBALS['TSFE']->gc_blog['category']);
+	function main($conf, $tableName = 'tx_gcblog_category') {
+	 	parent::main($conf, $tableName);
+
+		return $this->render( $this->config['templateFile'],
+								'TEMPLATE_CAT',
+								$this->conf['displayCat.'],
+								$this->results);
+	}
+
+	function initFilterQueryParts($currentParent = 0){
+		$this->query['WHERE'] .= ' AND '.$this->tableName.'.parent_category="'.$currentParent.'"';
+	}
+
+	function buildRender($template = array(), $configuration = array(), $results = array(), $currentLevel = 0) {
+		$template['item'] = $this->cObj->getSubpart($template['total'], '###ITEM###');
+		$out = '';
+
+		if( $results && count($results) ) {
+			foreach($results as $item) {
+				$markerArray=array();
+				$currentParent = $item['parent_category'];
+				//build children
+			 	$this->initStaticQueryParts();
+			 	$this->initFilterQueryParts($item['uid']);
+			 	$results = $this->execQuery( $this->query );
+			 	if(count($results)) {
+				 	$markerArray['###CHILDREN###'] = $this->render( $this->config['templateFile'],
+									'TEMPLATE_CAT',
+									$this->conf['displayCat.'],
+									$results, $currentLevel+1);
+				}else {
+					$markerArray['###CHILDREN###'] = '';
+				}
+
+
+				$this->cObj->start( $item, $this->tableName );
+				$this->applyMarkers ( $configuration['markers.'], $markerArray );
+				$out .= $this->cObj->substituteMarkerArrayCached($template['item'],$markerArray);
+			}
+		}
+
+		$subpartArray['###CLASS###'] = ' level-'.$currentLevel.' parent-'.$currentParent;
+		$subpartArray['###CONTENT###'] = $out;
+		$this->applyMarkers ( $configuration['markers.'], $subpartArray );
+
+		return $subpartArray;
+	}
+
+	function render($templateFile = '', $subPart = '', $configuration = array(), $results = array(), $currentLevel= 0 ) {
+		$templateCode = $this->cObj->fileResource($templateFile);
+		if ($templateCode) {
+			$template = array();
+			$template['total'] = $this->cObj->getSubpart($templateCode, '###'.$subPart.'###');
+
+			$subpartArray = $this->buildRender( $template, $configuration, $results, $currentLevel );
+
+			return $this->cObj->substituteMarkerArrayCached($template['total'], array(),$subpartArray);
+		} else {
+			return $this->pi_getLL('error.noTemplateFound');
+		}
 	}
 }
 
