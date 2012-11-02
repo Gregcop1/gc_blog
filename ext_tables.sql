@@ -17,6 +17,7 @@ CREATE TABLE tx_gcblog_category (
 	endtime int(11) DEFAULT '0' NOT NULL,
 	title tinytext,
   	parent_category int(11) unsigned DEFAULT '0' NOT NULL,
+	page int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid)

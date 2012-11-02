@@ -56,7 +56,7 @@ class tx_gcblog_pi1 extends tx_gclib {
 		$content = '';
 		switch($this->config['CODE']) {
 			case 'postList': {
-				//$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_list.php', 'tx_gcblog_list', $this->conf);
+				$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_postList.php', 'tx_gcblog_postList', $this->conf);
 			}break;
 			case 'categoryList':
 				$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_categoryList.php', 'tx_gcblog_categoryList', $this->conf);
@@ -70,15 +70,70 @@ class tx_gcblog_pi1 extends tx_gclib {
 	}
 
 	function initPlugin() {
+
+		//extConf
+		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
+
 		//init array of cats and tag
 		if(!isset($GLOBALS['TSFE']->gc_blog)){
+			//categories
+			$query = array(
+	 	 	 'SELECT' => 'tx_gcblog_category.*',
+	 	 	 'FROM' => 'tx_gcblog_category',
+	 	 	 'WHERE' => '1'
+	 	 	 			. (	$this->config['pidList'] ? ' AND '.'tx_gcblog_category'.'.pid in ('.implode(',', $this->getRecursivePid( $this->config['pidList'], $this->config['recursive'] )).')' : '')
+	 	 	 			. $this->cObj->enableFields('tx_gcblog_category'),
+	 	 	 'GROUP BY' => '',
+	 	 	 'ORDER BY' => 'tx_gcblog_category.title',
+	 	 	 'LIMIT' => ''
+	 	 	 );
+			$tempArray = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
+				$query['SELECT'],
+				$query['FROM'],
+				$query['WHERE'],
+				$query['GROUP BY'],
+				$query['ORDER BY'],
+				$query['LIMIT']
+			);
+			$GLOBALS['TSFE']->gc_blog['category'] = array();
+			if(count($tempArray)) {
+				foreach ($tempArray as $item) {
+					$GLOBALS['TSFE']->gc_blog['category'][$item['uid']] = $item;
+				}
+			}
+
+			//tags
+			$query = array(
+	 	 	 'SELECT' => 'tx_gcblog_tag.*',
+	 	 	 'FROM' => 'tx_gcblog_tag',
+	 	 	 'WHERE' => '1'
+	 	 	 			. (	$this->config['pidList'] ? ' AND '.'tx_gcblog_tag'.'.pid in ('.implode(',', $this->getRecursivePid( $this->config['pidList'], $this->config['recursive'] )).')' : '')
+	 	 	 			. $this->cObj->enableFields('tx_gcblog_tag'),
+	 	 	 'GROUP BY' => '',
+	 	 	 'ORDER BY' => 'tx_gcblog_tag.title',
+	 	 	 'LIMIT' => ''
+	 	 	 );
+			$tempArray = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
+				$query['SELECT'],
+				$query['FROM'],
+				$query['WHERE'],
+				$query['GROUP BY'],
+				$query['ORDER BY'],
+				$query['LIMIT']
+			);
+			$GLOBALS['TSFE']->gc_blog['tag'] = array();
+			if(count($tempArray)) {
+				foreach ($tempArray as $item) {
+					$GLOBALS['TSFE']->gc_blog['tag'][$item['uid']] = $item;
+				}
+			}
 
 			//embedValue
 			if(isset($this->piVars['category'])) {
 				$GLOBALS['TSFE']->gc_blog['current'] = array(
 						'category' => $this->piVars['category']
 					);
-			}elseif($GLOBALS['TSFE']->page['doktype'] == 150) {
+			}elseif($GLOBALS['TSFE']->page['doktype'] == $extConf['postCType']) {
 				$GLOBALS['TSFE']->gc_blog['current'] = array(
 						'category' => $GLOBALS['TSFE']->page['tx_gcblog_category'],
 						'tag' => $GLOBALS['TSFE']->page['tx_gcblog_tag'],

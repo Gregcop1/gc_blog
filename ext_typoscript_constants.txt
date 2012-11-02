@@ -1,0 +1,6 @@
+plugin.gc_blog{
+    template{
+        listPage = 1
+        contentToAvoidForDescription = 'header','image','bullets','table','uploads','mailform','login','search','multimedia','media','splash','menu','shortcut','list','script'
+    }
+}

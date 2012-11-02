@@ -1,3 +1,5 @@
+includeLibs.gc_blog_utils = EXT:gc_blog/lib/class.user_gcblog_utils.php
+
 plugin.tx_gcblog_pi1 {
 	config {
 		#CODE dertermine what to display, possible values : list, single, search
@@ -7,6 +9,7 @@ plugin.tx_gcblog_pi1 {
 		pidList = 1
 		recursive = 10
 
+		listPage = {$plugin.gc_blog.template.listPage}
 		category {
 			recursive = 100
 		}
@@ -36,7 +39,8 @@ plugin.tx_gcblog_pi1 {
 				20 = TEXT
 				20{
 					field = uid
-					noTrimWrap =  | cat-item-|
+					preUserFunc = user_gcblog_utils->getClasses
+					preUserFunc.classPrefix = cat-item-
 				}
 
 				30 = TEXT
@@ -48,6 +52,90 @@ plugin.tx_gcblog_pi1 {
 						equals.data = TSFE:gc_blog|current|category
 					}
 					noTrimWrap =  | |
+				}
+			}
+		}
+	}
+
+	displayPosts {
+		markers {
+			TITLE = TEXT
+			TITLE.field = title
+			TITLE.stdWrap.typolink{
+				parameter.field = uid
+			}
+
+			DESCRIPTION =  CONTENT
+			DESCRIPTION {
+				table = tt_content
+				select {
+					pidInList = {field:uid}
+					pidInList.insertData = 1
+					orderBy = sorting
+			 		where = colPos = 0
+			 		andWhere = tt_content.CType NOT IN ({$plugin.gc_blog.template.contentToAvoidForDescription})
+			 		andWhere.insertData = 1
+				}
+				renderObj.stdWrap {
+					crop = 200|...|1
+					stripHtml = 1
+				}
+				stdWrap.stripHtml = 1
+			}
+
+			PARAMS = COA
+			PARAMS {
+				wrap = class="|"
+
+				10 = TEXT
+				10.wrap = post-item|
+
+				20 = TEXT
+				20{
+					field = uid
+					preUserFunc = user_gcblog_utils->getClasses
+					preUserFunc.classPrefix = post-item-
+				}
+
+				25 = TEXT
+				25{
+					field = tx_gcblog_category
+					preUserFunc = user_gcblog_utils->getClasses
+					preUserFunc.classPrefix = post-cat-
+				}
+			}
+
+			META = COA
+			META{
+				10 = TEXT
+				10{
+					field = starttime
+					ifEmpty.field = crdate
+					strftime = %d/%m/%Y
+						noTrimWrap = |<p class="date">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.date}|</p>|
+						noTrimWrap.insertData = 1
+				}
+
+				20 = TEXT
+				20{
+					field = tx_gcblog_category
+					preUserFunc = user_gcblog_utils->getCatList
+					preUserFunc{
+						separator = ,&nbsp;
+						noTrimWrap = |<p class="categories">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.categories}|</p>|
+						noTrimWrap.insertData = 1
+					}
+				}
+
+				30 = TEXT
+				30{
+					field = tx_gcblog_tag
+					preUserFunc = user_gcblog_utils->getTagList
+					preUserFunc{
+						separator = ,&nbsp;
+						noTrimWrap = |<p class="tags">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.tags}|</p>|
+						noTrimWrap.insertData = 1
+					}
 				}
 			}
 		}

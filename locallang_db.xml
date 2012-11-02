@@ -7,24 +7,28 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="configuration.showPostOnBackendPageTree">Show Post on backend page tree</label>
-			<label index="tt_content.list_type_pi1">Blog - Category list</label>
+			<label index="configuration.postCType">Post cType ID</label>
+			<label index="tt_content.list_type_pi1">Blog</label>
 			<label index="tx_gcblog_category">Category</label>
 			<label index="tx_gcblog_tag">Tag</label>
 			<label index="tx_gcblog_post">Post</label>
 			<label index="tx_gcblog.category.title">Title</label>
 			<label index="tx_gcblog.category.blockComment">Block Comments</label>
 			<label index="tx_gcblog.category.parent_category">Parent Category</label>
+			<label index="tx_gcblog.category.page">Listing page of this category</label>
 			<label index="tx_gcblog.tag.title">Title</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="configuration.showPostOnBackendPageTree">Montrer les billets dans l'arborescence du Backend</label>
-			<label index="tt_content.list_type_pi1"><![CDATA[Blog - Liste des catégories]]></label>
+			<label index="configuration.postCType">Identifiant cType des billets</label>
+			<label index="tt_content.list_type_pi1"><![CDATA[Blog]]></label>
 			<label index="tx_gcblog_category"><![CDATA[Catégorie]]></label>
 			<label index="tx_gcblog_tag"><![CDATA[Tag]]></label>
 			<label index="tx_gcblog_post"><![CDATA[Billet]]></label>
 			<label index="tx_gcblog.category.title"><![CDATA[Titre]]></label>
 			<label index="tx_gcblog.category.blockComment"><![CDATA[Bloquer les commentaires]]></label>
 			<label index="tx_gcblog.category.parent_category"><![CDATA[Catégorie parente]]></label>
+			<label index="tx_gcblog.category.page">Page de liste pour cette categorie</label>
 			<label index="tx_gcblog.tag.title"><![CDATA[Titre]]></label>
 		</languageKey>
 	</data>

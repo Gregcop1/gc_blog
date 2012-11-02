@@ -101,9 +101,22 @@ $TCA['tx_gcblog_category'] = array (
 
 			)
 		),
+		'page' => Array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.category.page',
+			'config' => Array (
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'pages',
+				'size' => '1',
+				'maxitems' => '1',
+				'minitems' => '0',
+				'show_thumbs' => '1'
+			)
+		),
 	),
 	'types' => array (
-		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2,parent_category;;;;2-2-2')
+		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2,parent_category;;;;2-2-2,page;;;;2-2-2')
 	),
 	'palettes' => array (
 		'1' => array('showitem' => 'starttime, endtime')
@@ -173,6 +186,4 @@ $TCA['tx_gcblog_tag'] = array (
 		'1' => array('showitem' => '')
 	)
 );
-
-
 ?>

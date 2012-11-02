@@ -11,16 +11,24 @@
 			<label index="flexform.code.categoryList">List of categories</label>
 			<label index="flexform.code.tagList">List of tags</label>
 			<label index="flexform.code.postList">List of posts</label>
-			
+
+			<label index="template.postList.date">Publication's date: </label>
+			<label index="template.postList.categories">Categories: </label>
+			<label index="template.postList.tags">Tags: </label>
+
 			<label index="error.noResult">No result</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="flexform.configuration">Configuration du plugin</label>
 			<label index="flexform.code">Affichage</label>
-			<label index="flexform.code.categoryList">Liste de catégorie</label>
+			<label index="flexform.code.categoryList">Liste de catégories</label>
 			<label index="flexform.code.tagList">Liste de tags</label>
 			<label index="flexform.code.postList">Liste des billets</label>
-			
+
+			<label index="template.postList.date">Date de publication : </label>
+			<label index="template.postList.categories">Catégories : </label>
+			<label index="template.postList.tags">Tags : </label>
+
 			<label index="error.noResult">Aucun résultat</label>
 		</languageKey>
 	</data>
