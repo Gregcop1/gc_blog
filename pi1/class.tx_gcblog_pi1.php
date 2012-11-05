@@ -72,7 +72,7 @@ class tx_gcblog_pi1 extends tx_gclib {
 	function initPlugin() {
 
 		//extConf
-		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
+		$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
 
 		//init array of cats and tag
 		if(!isset($GLOBALS['TSFE']->gc_blog)){
@@ -127,7 +127,6 @@ class tx_gcblog_pi1 extends tx_gclib {
 					$GLOBALS['TSFE']->gc_blog['tag'][$item['uid']] = $item;
 				}
 			}
-
 			//embedValue
 			if(isset($this->piVars['category'])) {
 				$GLOBALS['TSFE']->gc_blog['current'] = array(

@@ -40,6 +40,25 @@ CREATE TABLE tx_gcblog_tag (
 	KEY parent (pid)
 );
 
+CREATE TABLE tx_gcblog_comment (
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+	tstamp int(11) DEFAULT '0' NOT NULL,
+	crdate int(11) DEFAULT '0' NOT NULL,
+	cruser_id int(11) DEFAULT '0' NOT NULL,
+	deleted tinyint(4) DEFAULT '0' NOT NULL,
+	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	author tinytext NOT NULL,
+	email tinytext NOT NULL,
+	comment mediumtext NOT NULL,
+	website tinytext,
+	remote_addr tinytext NOT NULL,
+  	parent_comment int(11) unsigned DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid)
+);
+
 CREATE TABLE pages (
 	tx_gcblog_category tinytext,
 	tx_gcblog_tag tinytext,

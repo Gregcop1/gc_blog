@@ -67,6 +67,10 @@ class tx_gcblog_postList extends tx_gclib_list {
         if($this->piVars['tag']) {
             $this->query['WHERE'] .= ' AND "'.$this->piVars['tag'].'" in ('.$this->tableName.'.tx_gcblog_tag)';
         }
+
+        if($this->piVars['author']) {
+            $this->query['WHERE'] .= ' AND "'.$this->piVars['author'].'" =  '.$this->tableName.'.cruser_id';
+        }
     }
 }
 

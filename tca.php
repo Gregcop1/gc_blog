@@ -186,4 +186,99 @@ $TCA['tx_gcblog_tag'] = array (
 		'1' => array('showitem' => '')
 	)
 );
+
+$TCA['tx_gcblog_comment'] = array (
+	'ctrl' => $TCA['tx_gcblog_comment']['ctrl'],
+	'interface' => array (
+		'showRecordFieldList' => 'hidden,author,email,website,comment,parent_comment,remote_addr'
+	),
+	'feInterface' => $TCA['tx_gcblog_comment']['feInterface'],
+	'columns' => array (
+		'hidden' => array (
+			'exclude' => 1,
+			'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+			'config'  => array (
+				'type'    => 'check',
+				'default' => '0'
+			)
+		),
+		'author' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.comment.author',
+			'config' => array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'required',
+			)
+		),
+		'email' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.comment.email',
+			'config' => array (
+				'type' => 'input',
+				'size' => '30',
+				'eval' => 'required',
+			)
+		),
+		'website' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.comment.website',
+			'config' => array (
+				'type' => 'input',
+				'size' => '30',
+			)
+		),
+		'comment' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.comment.comment',
+			'config' => array (
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5',
+				'wizards' => Array(
+					'_PADDING' => 4,
+					'RTE' => Array(
+						'notNewRecords' => 1,
+						'RTEonly' => 1,
+						'type' => 'script',
+						'title' => 'LLL:EXT:cms/locallang_ttc.php:bodytext.W.RTE',
+						'icon' => 'wizard_rte2.gif',
+						'script' => 'wizard_rte.php',
+					),
+				)
+			)
+		),
+		'parent_comment' => array (
+			'exclude' => 1,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.comment.parent_comment',
+			'config' => Array (
+				'type' => 'select',
+				'foreign_table' => 'tx_gcblog_comment',
+				'autoSizeMax' => 50,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'items' => Array(
+					Array('',0)
+				),
+				'readOnly' => 1,
+
+			)
+		),
+		'remote_addr' => array (
+			'exclude' => 0,
+			'label' => 'LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog.comment.remote_addr',
+			'config' => array (
+				'type' => 'input',
+				'size' => '30',
+				'readOnly' => 1,
+			)
+		),
+	),
+	'types' => array (
+		'0' => array('showitem' => 'hidden;;1, author;;;;2-2-2, email;;;;2-2-2, website;;;;2-2-2, comment;;2;richtext:rte_transform[flag=rte_enabled|mode=ts];;;;2-2-2, parent_comment;;;;2-2-2, remote_addr;;;;2-2-2')
+	),
+	'palettes' => array (
+		'1' => array('showitem' => '')
+	)
+);
 ?>

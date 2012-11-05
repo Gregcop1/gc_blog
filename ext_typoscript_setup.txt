@@ -105,39 +105,7 @@ plugin.tx_gcblog_pi1 {
 				}
 			}
 
-			META = COA
-			META{
-				10 = TEXT
-				10{
-					field = starttime
-					ifEmpty.field = crdate
-					strftime = %d/%m/%Y
-						noTrimWrap = |<p class="date">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.date}|</p>|
-						noTrimWrap.insertData = 1
-				}
-
-				20 = TEXT
-				20{
-					field = tx_gcblog_category
-					preUserFunc = user_gcblog_utils->getCatList
-					preUserFunc{
-						separator = ,&nbsp;
-						noTrimWrap = |<p class="categories">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.categories}|</p>|
-						noTrimWrap.insertData = 1
-					}
-				}
-
-				30 = TEXT
-				30{
-					field = tx_gcblog_tag
-					preUserFunc = user_gcblog_utils->getTagList
-					preUserFunc{
-						separator = ,&nbsp;
-						noTrimWrap = |<p class="tags">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.tags}|</p>|
-						noTrimWrap.insertData = 1
-					}
-				}
-			}
+			META < lib.postMeta
 		}
 	}
 
@@ -148,3 +116,57 @@ plugin.tx_gcblog_pi1 {
 }
 
 
+lib.postMeta = COA
+lib.postMeta {
+	wrap = <div class="meta">|</div>
+
+	10 = TEXT
+	10{
+		field = starttime
+		ifEmpty.field = crdate
+		strftime = %d/%m/%Y
+		noTrimWrap = |<p class="date">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.date}|</p>|
+		noTrimWrap.insertData = 1
+	}
+
+	20 = RECORDS
+	20{
+		source = be_users_{field:cruser_id}
+		source.insertData = 1
+		tables = be_users
+		dontCheckPid = 1
+		conf.be_users = TEXT
+		conf.be_users{
+			field = realName
+			noTrimWrap = |<p class="author">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.author}|</p>|
+			noTrimWrap.insertData = 1
+			stdWrap.typolink{
+				parameter.data = page:uid
+				additionalParams = &tx_gcblog_pi1[author]={field:uid}
+				additionalParams.insertData = 1
+			}
+		}
+	}
+
+	30 = TEXT
+	30{
+		field = tx_gcblog_category
+		preUserFunc = user_gcblog_utils->getCatList
+		preUserFunc{
+			separator = ,&nbsp;
+			noTrimWrap = |<p class="categories">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.categories}|</p>|
+			noTrimWrap.insertData = 1
+		}
+	}
+
+	40 = TEXT
+	40{
+		field = tx_gcblog_tag
+		preUserFunc = user_gcblog_utils->getTagList
+		preUserFunc{
+			separator = ,&nbsp;
+			noTrimWrap = |<p class="tags">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.tags}|</p>|
+			noTrimWrap.insertData = 1
+		}
+	}
+}

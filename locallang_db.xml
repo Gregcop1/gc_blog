@@ -9,27 +9,53 @@
 			<label index="configuration.showPostOnBackendPageTree">Show Post on backend page tree</label>
 			<label index="configuration.postCType">Post cType ID</label>
 			<label index="tt_content.list_type_pi1">Blog</label>
+
 			<label index="tx_gcblog_category">Category</label>
 			<label index="tx_gcblog_tag">Tag</label>
 			<label index="tx_gcblog_post">Post</label>
+			<label index="tx_gcblog_comment">Comment</label>
+
 			<label index="tx_gcblog.category.title">Title</label>
 			<label index="tx_gcblog.category.blockComment">Block Comments</label>
 			<label index="tx_gcblog.category.parent_category">Parent Category</label>
 			<label index="tx_gcblog.category.page">Listing page of this category</label>
+
 			<label index="tx_gcblog.tag.title">Title</label>
+
+			<label index="tx_gcblog.comment.author">Author</label>
+			<label index="tx_gcblog.comment.email">Email</label>
+			<label index="tx_gcblog.comment.website">Website</label>
+			<label index="tx_gcblog.comment.comment">Comment</label>
+			<label index="tx_gcblog.comment.parent_comment">Reply to</label>
+			<label index="tx_gcblog.comment.remote_addr">I.P. Adress</label>
+
+			<label index="pages.postInfo">Post data</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="configuration.showPostOnBackendPageTree">Montrer les billets dans l'arborescence du Backend</label>
-			<label index="configuration.postCType">Identifiant cType des billets</label>
+			<label index="configuration.postCType"><![CDATA[Identifiant cType des billets]]></label>
 			<label index="tt_content.list_type_pi1"><![CDATA[Blog]]></label>
+
 			<label index="tx_gcblog_category"><![CDATA[Catégorie]]></label>
 			<label index="tx_gcblog_tag"><![CDATA[Tag]]></label>
 			<label index="tx_gcblog_post"><![CDATA[Billet]]></label>
+			<label index="tx_gcblog_comment"><![CDATA[Commentaire]]></label>
+
 			<label index="tx_gcblog.category.title"><![CDATA[Titre]]></label>
 			<label index="tx_gcblog.category.blockComment"><![CDATA[Bloquer les commentaires]]></label>
 			<label index="tx_gcblog.category.parent_category"><![CDATA[Catégorie parente]]></label>
-			<label index="tx_gcblog.category.page">Page de liste pour cette categorie</label>
+			<label index="tx_gcblog.category.page"><![CDATA[Page de liste pour cette categorie]]></label>
+
 			<label index="tx_gcblog.tag.title"><![CDATA[Titre]]></label>
+
+			<label index="tx_gcblog.comment.author"><![CDATA[Auteur]]></label>
+			<label index="tx_gcblog.comment.email"><![CDATA[Adresse mail]]></label>
+			<label index="tx_gcblog.comment.website"><![CDATA[Site]]></label>
+			<label index="tx_gcblog.comment.comment"><![CDATA[Commentaire]]></label>
+			<label index="tx_gcblog.comment.parent_comment"><![CDATA[En réponse à]]></label>
+			<label index="tx_gcblog.comment.remote_addr"><![CDATA[Adress I.P.]]></label>
+
+			<label index="pages.postInfo"><![CDATA[Informations sur le billet]]></label>
 		</languageKey>
 	</data>
 </T3locallang>

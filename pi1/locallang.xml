@@ -15,6 +15,7 @@
 			<label index="template.postList.date">Publication's date: </label>
 			<label index="template.postList.categories">Categories: </label>
 			<label index="template.postList.tags">Tags: </label>
+			<label index="template.postList.author">By: </label>
 
 			<label index="error.noResult">No result</label>
 		</languageKey>
@@ -28,6 +29,7 @@
 			<label index="template.postList.date">Date de publication : </label>
 			<label index="template.postList.categories">Catégories : </label>
 			<label index="template.postList.tags">Tags : </label>
+			<label index="template.postList.author">Par : </label>
 
 			<label index="error.noResult">Aucun résultat</label>
 		</languageKey>
