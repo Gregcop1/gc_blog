@@ -35,9 +35,9 @@
  * @package TYPO3
  * @subpackage  tx_gcblog
  */
-class tx_gcblog_postList extends tx_gclib_list {
+class tx_gcblog_commentsListOfPost extends tx_gclib_list {
     var $prefixId      = 'tx_gcblog_pi1';       // Same as class name
-    var $scriptRelPath = 'pi1/class.tx_gcblog_postList.php';    // Path to this script relative to the extension dir.
+    var $scriptRelPath = 'pi1/class.tx_gcblog_commentsListOfPost.php';    // Path to this script relative to the extension dir.
     var $extKey        = 'gc_blog'; // The extension key.
 
     /**
@@ -47,37 +47,26 @@ class tx_gcblog_postList extends tx_gclib_list {
      * @param   array       $conf: The PlugIn configuration
      * @return  The content that is displayed on the website
      */
-    function main($conf, $tableName = 'pages') {
+    function main($conf, $tableName = 'tx_gcblog_comment') {
         parent::main($conf, $tableName);
 
         return $this->render( $this->config['templateFile'],
-                                'TEMPLATE_POSTS',
-                                $this->conf['displayPosts.'],
+                                'TEMPLATE_COMMENTS_LIST_OF_POST',
+                                $this->conf['displayCommentsListOfPost.'],
                                 $this->results);
     }
 
     function initFilterQueryParts(){
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
-        $this->query['WHERE'] .= ' AND '.$this->tableName.'.doktype="'.$extConf['postCType'].'"';
-
-        if($this->piVars['category']) {
-            $this->query['WHERE'] .= ' AND "'.$this->piVars['category'].'" in ('.$this->tableName.'.tx_gcblog_category)';
-        }
-
-        if($this->piVars['tag']) {
-            $this->query['WHERE'] .= ' AND "'.$this->piVars['tag'].'" in ('.$this->tableName.'.tx_gcblog_tag)';
-        }
-
-        if($this->piVars['author']) {
-            $this->query['WHERE'] .= ' AND "'.$this->piVars['author'].'" =  '.$this->tableName.'.cruser_id';
-        }
+        $this->query['SELECT'] .= ', MD5(LOWER('.$this->tableName.'.email)) as encodedEmail, c2.author as replyTo';
+        $this->query['FROM'] .= ' LEFT OUTER JOIN tx_gcblog_comment c2 ON ('.$this->tableName.'.parent_comment = c2.uid) ';
+        $this->query['ORDER BY'] = $this->tableName.'.crdate';
     }
 }
 
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/gc_blog/pi1/class.tx_gcblog_postList.php'])    {
-    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/gc_blog/pi1/class.tx_gcblog_postList.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/gc_blog/pi1/class.tx_gcblog_commentsListOfPost.php'])    {
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/gc_blog/pi1/class.tx_gcblog_commentsListOfPost.php']);
 }
 
 ?>

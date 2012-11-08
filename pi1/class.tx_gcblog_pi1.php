@@ -61,8 +61,11 @@ class tx_gcblog_pi1 extends tx_gclib {
 			case 'categoryList':
 				$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_categoryList.php', 'tx_gcblog_categoryList', $this->conf);
 			break;
-			case 'tagList':
-				//$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_search.php', 'tx_gcblog_search', $this->conf);
+			case 'commentsListOfPost':
+				$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_commentsListOfPost.php', 'tx_gcblog_commentsListOfPost', $this->conf);
+			break;
+			case 'commentForm':
+				$content = $this->makeInstance(t3lib_extMgm::extPath($this->extKey).'pi1/class.tx_gcblog_commentForm.php', 'tx_gcblog_commentForm', $this->conf);
 			break;
 		}
 

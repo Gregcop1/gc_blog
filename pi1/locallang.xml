@@ -17,7 +17,19 @@
 			<label index="template.postList.tags">Tags: </label>
 			<label index="template.postList.author">By: </label>
 
+			<label index="template.commentList.reply">Reply</label>
+			<label index="template.commentList.replyTo"> reply to </label>
+
+			<label index="template.commentForm.name">Name</label>
+			<label index="template.commentForm.email">Email</label>
+			<label index="template.commentForm.website">Website</label>
+			<label index="template.commentForm.message">Message</label>
+			<label index="template.commentForm.send">Send</label>
+
 			<label index="error.noResult">No result</label>
+			<label index="error.badCommentInsert">There's a problem during the comment validation</label>
+
+			<label index="valid.commentInsert">You're comment has been submitted</label>
 		</languageKey>
 		<languageKey index="fr" type="array">
 			<label index="flexform.configuration">Configuration du plugin</label>
@@ -31,7 +43,19 @@
 			<label index="template.postList.tags">Tags : </label>
 			<label index="template.postList.author">Par : </label>
 
+			<label index="template.commentList.reply">Répondre</label>
+			<label index="template.commentList.replyTo"> en réponse à </label>
+
+			<label index="template.commentForm.name">Nom</label>
+			<label index="template.commentForm.email">Email</label>
+			<label index="template.commentForm.website">Site</label>
+			<label index="template.commentForm.message">Message</label>
+			<label index="template.commentForm.send">Envoyer</label>
+
 			<label index="error.noResult">Aucun résultat</label>
+			<label index="error.badCommentInsert">Une erreur est survenue durant l'enregistrement de votre commentaire</label>
+
+			<label index="valid.commentInsert">Votre commentaire a été ajouté avec succès</label>
 		</languageKey>
 	</data>
 </T3locallang>

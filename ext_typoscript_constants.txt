@@ -1,6 +1,9 @@
 plugin.gc_blog{
     template{
         listPage = 1
+        commentThumbnailSize = 60
+        dateFormat = %d/%m/%Y
+
         contentToAvoidForDescription = 'header','image','bullets','table','uploads','mailform','login','search','multimedia','media','splash','menu','shortcut','list','script'
     }
 }

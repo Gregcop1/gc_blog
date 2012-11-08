@@ -24,27 +24,25 @@ plugin.tx_gcblog_pi1 {
 			TITLE = TEXT
 			TITLE.field = title
 			TITLE.stdWrap.typolink{
-				parameter.data = page:uid
+				parameter = {$plugin.gc_blog.template.listPage}
+				parameter.insertData = 1
 				additionalParams = &tx_gcblog_pi1[category]={field:uid}
 				additionalParams.insertData = 1
 			}
 
 			PARAMS = COA
 			PARAMS {
-				wrap = class="|"
+				wrap = class="cat-item|"
 
 				10 = TEXT
-				10.wrap = cat-item|
-
-				20 = TEXT
-				20{
+				10{
 					field = uid
 					preUserFunc = user_gcblog_utils->getClasses
 					preUserFunc.classPrefix = cat-item-
 				}
 
-				30 = TEXT
-				30{
+				20 = TEXT
+				20{
 					value = current-cat
 					if{
 						value = {field:uid}
@@ -85,88 +83,167 @@ plugin.tx_gcblog_pi1 {
 
 			PARAMS = COA
 			PARAMS {
-				wrap = class="|"
+				wrap = class="post-item|"
 
 				10 = TEXT
-				10.wrap = post-item|
-
-				20 = TEXT
-				20{
+				10{
 					field = uid
 					preUserFunc = user_gcblog_utils->getClasses
 					preUserFunc.classPrefix = post-item-
 				}
 
-				25 = TEXT
-				25{
+				20 = TEXT
+				20{
 					field = tx_gcblog_category
 					preUserFunc = user_gcblog_utils->getClasses
 					preUserFunc.classPrefix = post-cat-
 				}
 			}
 
-			META < lib.postMeta
-		}
-	}
+			META = COA
+			META {
+				wrap = <div class="meta">|</div>
 
-	displaySingle {
-		markers {
-		}
-	}
-}
+				10 = TEXT
+				10{
+					field = starttime
+					ifEmpty.field = crdate
+					strftime = {$plugin.gc_blog.template.dateFormat}
+					strftime.insertData = 1
+					noTrimWrap = |<p class="date">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.date}|</p>|
+					noTrimWrap.insertData = 1
+				}
 
+				20 = RECORDS
+				20{
+					source = be_users_{field:cruser_id}
+					source.insertData = 1
+					tables = be_users
+					dontCheckPid = 1
+					conf.be_users = TEXT
+					conf.be_users{
+						field = realName
+						noTrimWrap = |<p class="author">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.author}|</p>|
+						noTrimWrap.insertData = 1
+						stdWrap.typolink{
+							parameter = {$plugin.gc_blog.template.listPage}
+							parameter.insertData = 1
+							additionalParams = &tx_gcblog_pi1[author]={field:uid}
+							additionalParams.insertData = 1
+						}
+					}
+				}
 
-lib.postMeta = COA
-lib.postMeta {
-	wrap = <div class="meta">|</div>
+				30 = TEXT
+				30{
+					field = tx_gcblog_category
+					preUserFunc = user_gcblog_utils->getCatList
+					preUserFunc{
+						separator = ,&nbsp;
+						noTrimWrap = |<p class="categories">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.categories}|</p>|
+						noTrimWrap.insertData = 1
+					}
+				}
 
-	10 = TEXT
-	10{
-		field = starttime
-		ifEmpty.field = crdate
-		strftime = %d/%m/%Y
-		noTrimWrap = |<p class="date">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.date}|</p>|
-		noTrimWrap.insertData = 1
-	}
-
-	20 = RECORDS
-	20{
-		source = be_users_{field:cruser_id}
-		source.insertData = 1
-		tables = be_users
-		dontCheckPid = 1
-		conf.be_users = TEXT
-		conf.be_users{
-			field = realName
-			noTrimWrap = |<p class="author">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.author}|</p>|
-			noTrimWrap.insertData = 1
-			stdWrap.typolink{
-				parameter.data = page:uid
-				additionalParams = &tx_gcblog_pi1[author]={field:uid}
-				additionalParams.insertData = 1
+				40 = TEXT
+				40{
+					field = tx_gcblog_tag
+					preUserFunc = user_gcblog_utils->getTagList
+					preUserFunc{
+						separator = ,&nbsp;
+						noTrimWrap = |<p class="tags">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.tags}|</p>|
+						noTrimWrap.insertData = 1
+					}
+				}
 			}
 		}
 	}
 
-	30 = TEXT
-	30{
-		field = tx_gcblog_category
-		preUserFunc = user_gcblog_utils->getCatList
-		preUserFunc{
-			separator = ,&nbsp;
-			noTrimWrap = |<p class="categories">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.categories}|</p>|
-			noTrimWrap.insertData = 1
+	displayCommentsListOfPost {
+		markers {
+            THUMBNAIL = HTML
+            THUMBNAIL{
+                value = <img src="http://www.gravatar.com/avatar/{field:encodedEmail}?s={$plugin.gc_blog.template.commentThumbnailSize}&r=pg" alt=""/>
+                value.insertData = 1
+            }
+
+        	AUTHOR = COA
+			AUTHOR{
+				wrap = <p class="author">|</p>
+
+				10 = TEXT
+				10 {
+					field = author
+					stdWrap.typolink{
+						parameter = {field:website} _blank
+						parameter.insertData = 1
+					}
+				}
+
+				20 = TEXT
+				20 {
+	            	field = replyTo
+	            	stdWrap.typolink{
+	            		parameter.data = page:uid
+	            		section = comment-item-{field:parent_comment}
+	            		section.insertData = 1
+	            	}
+	            	noTrimWrap = |{LLL:EXT:gc_blog/pi1/locallang.xml:template.commentList.replyTo} ||
+	            	noTrimWrap.insertData = 1
+					if.isTrue.field = parent_comment
+				}
+			}
+
+            DATE = TEXT
+            DATE{
+            	field = crdate
+				strftime = {$plugin.gc_blog.template.dateFormat}
+				strftime.insertData = 1
+				wrap = <p class="date">|</p>
+            }
+
+            MESSAGE = TEXT
+            MESSAGE{
+            	field = comment
+				stdWrap.parseFunc < lib.parseFunc_RTE
+            }
+
+            REPLY = TEXT
+            REPLY{
+            	value = {LLL:EXT:gc_blog/pi1/locallang.xml:template.commentList.reply}
+            	insertData = 1
+            	stdWrap.typolink{
+            		parameter.data = page:uid
+            		section = commentForm
+            	}
+				wrap = <p class="reply">|</p>
+            }
+
+			PARAMS = COA
+			PARAMS {
+				10 = TEXT
+				10{
+					field = uid
+					wrap = id="comment-item-|"
+				}
+
+				20 = TEXT
+				20{
+					field = uid
+					noTrimWrap = | class="comment-item comment-item-|"|
+				}
+			}
 		}
 	}
 
-	40 = TEXT
-	40{
-		field = tx_gcblog_tag
-		preUserFunc = user_gcblog_utils->getTagList
-		preUserFunc{
-			separator = ,&nbsp;
-			noTrimWrap = |<p class="tags">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.tags}|</p>|
-			noTrimWrap.insertData = 1
-		}
-	}
+    displayCommentForm {
+        markers {
+
+        }
+    }
 }
+
+plugin.tx_gcblog_pi1._CSS_DEFAULT_STYLE (
+	.tx-gcblog-pi1 p.replyTo { display: none; }
+	.tx-gcblog-pi1 .doNotFill { position: absolute; left: -9999px; }
+)
