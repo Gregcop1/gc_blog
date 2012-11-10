@@ -1,3 +1,6 @@
+# cat=basic/enable; type=boolean; label=LLL:EXT:gc_blog/locallang_db.xml:configuration.includeJQuery
+includeJQuery = 0
+
 # cat=basic/enable; type=boolean; label=LLL:EXT:gc_blog/locallang_db.xml:configuration.showPostOnBackendPageTree
 showPostOnBackendPageTree = 1
 

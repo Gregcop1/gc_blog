@@ -26,6 +26,11 @@
 			<label index="template.commentForm.message">Message</label>
 			<label index="template.commentForm.send">Send</label>
 
+			<label index="mail.subject"><![CDATA[New comment on the post: %s]]></label>
+			<label index="mail.body"><![CDATA[A new comment is waiting your approuval.<br/>
+The post: %s<br />
+<a href="%s">Go to administration page</a>.]]></label>
+
 			<label index="error.noResult">No result</label>
 			<label index="error.badCommentInsert">There's a problem during the comment validation</label>
 
@@ -51,6 +56,11 @@
 			<label index="template.commentForm.website">Site</label>
 			<label index="template.commentForm.message">Message</label>
 			<label index="template.commentForm.send">Envoyer</label>
+
+			<label index="mail.subject"><![CDATA[Nouveau commentaire sur le billet : %s]]></label>
+			<label index="mail.body"><![CDATA[Un nouveau commentaire attend votre approbation<br/>
+Billet concerné : %s<br />
+<a href="%s">Accéder à l'administation de ce billet</a>.]]></label>
 
 			<label index="error.noResult">Aucun résultat</label>
 			<label index="error.badCommentInsert">Une erreur est survenue durant l'enregistrement de votre commentaire</label>

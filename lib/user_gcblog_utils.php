@@ -1,5 +1,4 @@
 <?php
-
 class user_gcblog_utils {
     var $cObj;
 

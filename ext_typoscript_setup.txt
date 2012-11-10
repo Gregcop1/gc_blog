@@ -1,4 +1,4 @@
-includeLibs.gc_blog_utils = EXT:gc_blog/lib/class.user_gcblog_utils.php
+includeLibs.gc_blog_utils = EXT:gc_blog/lib/user_gcblog_utils.php
 
 plugin.tx_gcblog_pi1 {
 	config {
@@ -215,6 +215,8 @@ plugin.tx_gcblog_pi1 {
             	stdWrap.typolink{
             		parameter.data = page:uid
             		section = commentForm
+            		ATagParams = class="reply" reply-uid="{field:uid}" reply-name="{field:author}"
+            		ATagParams.insertData = 1
             	}
 				wrap = <p class="reply">|</p>
             }

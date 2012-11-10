@@ -12,7 +12,7 @@ return array(
     'tx_gcblog_postList' => $extensionPath . 'class.tx_gcblog_postList.php',
     'tx_gcblog_commentsListOfPost' => $extensionPath . 'class.tx_gcblog_commentsListOfPost.php',
     'tx_gcblog_commentForm' => $extensionPath . 'class.tx_gcblog_commentForm.php',
-	'ux_t3lib_tree_pagetree_dataprovider' => $extensionPath . 'class.ux_t3lib_tree_pagetree_dataprovider.php',
+    'user_gcblog_utils' => $extensionPath . 'class.user_gcblog_utils.php',
 );
 unset($extensionPath);
 ?>

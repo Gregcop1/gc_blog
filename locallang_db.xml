@@ -8,6 +8,7 @@
 		<languageKey index="default" type="array">
 			<label index="configuration.showPostOnBackendPageTree">Show Post on backend page tree</label>
 			<label index="configuration.postCType">Post cType ID</label>
+			<label index="configuration.includeJQuery">Include jQuery</label>
 			<label index="tt_content.list_type_pi1">Blog</label>
 
 			<label index="tx_gcblog_category">Category</label>
@@ -34,6 +35,7 @@
 		<languageKey index="fr" type="array">
 			<label index="configuration.showPostOnBackendPageTree">Montrer les billets dans l'arborescence du Backend</label>
 			<label index="configuration.postCType"><![CDATA[Identifiant cType des billets]]></label>
+			<label index="configuration.includeJQuery"><![CDATA[Inclure jQuery]]></label>
 			<label index="tt_content.list_type_pi1"><![CDATA[Blog]]></label>
 
 			<label index="tx_gcblog_category"><![CDATA[Catégorie]]></label>

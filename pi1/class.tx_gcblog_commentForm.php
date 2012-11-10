@@ -44,11 +44,14 @@ class tx_gcblog_commentForm extends tx_gclib_form {
 
     function main($conf, $id = '', $method = 'POST', $enctype = 'multipart/form-data', $action = '') {
         parent::main($conf, $id, $method, $enctype, $action);
-        $GLOBALS['TSFE']->additionnalHeaderData['gc_blog'] = '<script type="text/javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/js/form.js"></script>
 
-            <script type="text/javascript">alert("bla");</script>
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey]);
+        if($extConf['includeJQuery']) {
+            $GLOBALS['TSFE']->additionalHeaderData['jquery'] = '<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>';
+        }
+
+        $GLOBALS['TSFE']->additionalHeaderData['gc_blog'] = '<script type="text/javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'res/js/form.js"></script>
         ';
-//t3lib_utility_Debug::debug( $GLOBALS['TSFE']->additionnalHeaderData);
 
         return $this->render($this->config['templateFile'], 'TEMPLATE_COMMENT_FORM',  $this->conf['displayCommentForm.']);
     }
@@ -66,11 +69,24 @@ class tx_gcblog_commentForm extends tx_gclib_form {
                 'author' => $this->piVars['name'],
                 'email' => $this->piVars['email'],
                 'website' => $this->piVars['website'],
-                'comment' => $this->piVars['messagelo'],
+                'comment' => $this->piVars['message'],
                 'remote_addr' => $_SERVER['REMOTE_ADDR'],
                 'parent_comment' => $this->piVars['replyTo']
                 ))) {
                 $this->flashMessage = $this->pi_getLL('valid.commentInsert');
+
+                // sending confirmation email
+                $from = t3lib_utility_Mail::getSystemFrom();
+                $mail = t3lib_div::makeInstance('t3lib_mail_Message');
+                $mail->setFrom($from);
+                $mail->setTo("gregcop1@gmail.com");
+                $mail->setSubject(sprintf($this->pi_getLL('mail.subject'),
+                                    $GLOBALS['TSFE']->page['title']));
+                $mail->setBody(sprintf($this->pi_getLL('mail.body'),
+                                    $GLOBALS['TSFE']->page['title'],
+                                    'http://'.$_SERVER['HTTP_HOST'].'/typo3/index.php?redirect_url=mod.php%3F%26M%3Dweb_list%26id%3D'.$GLOBALS['TSFE']->id
+            ));
+                $mail->send();
             }else {
                 $this->flashMessage = $this->pi_getLL('error.badCommentInsert');
             }
@@ -86,7 +102,7 @@ class tx_gcblog_commentForm extends tx_gclib_form {
         parent::buildFields();
 
         $this->fields['doNotFill'] = $this->setField('text', 'doNotFill', '', '', '', 'doNotFill' );
-        $this->fields['replyTo'] = $this->setField('hidden', 'replyTo' );
+        $this->fields['replyTo'] = $this->setField('hidden', 'replyTo', '', '', '', 'replyTo' );
         $this->fields['name'] = $this->setField('text', 'name', '', $this->pi_getLL('template.commentForm.name') );
         $this->fields['email'] = $this->setField('text', 'email', '', $this->pi_getLL('template.commentForm.email') );
         $this->fields['website'] = $this->setField('text', 'website', '', $this->pi_getLL('template.commentForm.website') );
