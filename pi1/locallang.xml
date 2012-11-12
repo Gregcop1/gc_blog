@@ -11,6 +11,7 @@
 			<label index="flexform.code.categoryList">List of categories</label>
 			<label index="flexform.code.tagList">List of tags</label>
 			<label index="flexform.code.postList">List of posts</label>
+			<label index="flexform.templateFile">Template</label>
 
 			<label index="template.postList.date">Publication's date: </label>
 			<label index="template.postList.categories">Categories: </label>
@@ -33,6 +34,7 @@ The post: %s<br />
 
 			<label index="error.noResult">No result</label>
 			<label index="error.badCommentInsert">There's a problem during the comment validation</label>
+			<label index="error.commentDisabled"><![CDATA[<p>Comments are disabled for this post</p>]]></label>
 
 			<label index="valid.commentInsert">You're comment has been submitted</label>
 		</languageKey>
@@ -42,6 +44,7 @@ The post: %s<br />
 			<label index="flexform.code.categoryList">Liste de catégories</label>
 			<label index="flexform.code.tagList">Liste de tags</label>
 			<label index="flexform.code.postList">Liste des billets</label>
+			<label index="flexform.templateFile">Gabarit</label>
 
 			<label index="template.postList.date">Date de publication : </label>
 			<label index="template.postList.categories">Catégories : </label>
@@ -64,6 +67,7 @@ Billet concerné : %s<br />
 
 			<label index="error.noResult">Aucun résultat</label>
 			<label index="error.badCommentInsert">Une erreur est survenue durant l'enregistrement de votre commentaire</label>
+			<label index="error.commentDisabled"><![CDATA[<p>Les commentaires sont désactivés pour ce billet.</p>]]></label>
 
 			<label index="valid.commentInsert">Votre commentaire a été ajouté avec succès</label>
 		</languageKey>

@@ -15,9 +15,9 @@
 			<label index="tx_gcblog_tag">Tag</label>
 			<label index="tx_gcblog_post">Post</label>
 			<label index="tx_gcblog_comment">Comment</label>
+			<label index="tx_gcblog.blockComment">Block Comments</label>
 
 			<label index="tx_gcblog.category.title">Title</label>
-			<label index="tx_gcblog.category.blockComment">Block Comments</label>
 			<label index="tx_gcblog.category.parent_category">Parent Category</label>
 			<label index="tx_gcblog.category.page">Listing page of this category</label>
 
@@ -42,9 +42,9 @@
 			<label index="tx_gcblog_tag"><![CDATA[Tag]]></label>
 			<label index="tx_gcblog_post"><![CDATA[Billet]]></label>
 			<label index="tx_gcblog_comment"><![CDATA[Commentaire]]></label>
+			<label index="tx_gcblog.blockComment"><![CDATA[Bloquer les commentaires]]></label>
 
 			<label index="tx_gcblog.category.title"><![CDATA[Titre]]></label>
-			<label index="tx_gcblog.category.blockComment"><![CDATA[Bloquer les commentaires]]></label>
 			<label index="tx_gcblog.category.parent_category"><![CDATA[Catégorie parente]]></label>
 			<label index="tx_gcblog.category.page"><![CDATA[Page de liste pour cette categorie]]></label>
 

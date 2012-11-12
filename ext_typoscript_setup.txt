@@ -6,17 +6,22 @@ plugin.tx_gcblog_pi1 {
 		CODE = sDEF|lDEF|CODE|vDEF
 		CODE.ifEmpty = postList
 
-		pidList = 1
-		recursive = 10
+		pidList = sDEF|lDEF|pages|vDEF
+		pidList.ifEmpty = 1
+		recursive = sDEF|lDEF|recursive|vDEF
+		recursive.ifEmpty = 10
 
-		listPage = {$plugin.gc_blog.template.listPage}
+		listPage = {$plugin.gc_blog.listPage}
 		category {
 			recursive = 100
 		}
 
-		templateFile = EXT:gc_blog/res/template.html
+		templateFile = sDEF|lDEF|templateFile|vDEF
+		templateFile.ifEmpty = EXT:gc_blog/res/template.html
 
 		orderBy = sorting ASC
+
+		commentAdminMails = {$plugin.gc_blog.commentAdminMails}
 	}
 
 	displayCat {
@@ -24,7 +29,7 @@ plugin.tx_gcblog_pi1 {
 			TITLE = TEXT
 			TITLE.field = title
 			TITLE.stdWrap.typolink{
-				parameter = {$plugin.gc_blog.template.listPage}
+				parameter = {$plugin.gc_blog.listPage}
 				parameter.insertData = 1
 				additionalParams = &tx_gcblog_pi1[category]={field:uid}
 				additionalParams.insertData = 1
@@ -71,13 +76,11 @@ plugin.tx_gcblog_pi1 {
 					pidInList.insertData = 1
 					orderBy = sorting
 			 		where = colPos = 0
-			 		andWhere = tt_content.CType NOT IN ({$plugin.gc_blog.template.contentToAvoidForDescription})
+			 		andWhere = tt_content.CType NOT IN ({$plugin.gc_blog.contentToAvoidForDescription})
 			 		andWhere.insertData = 1
 				}
-				renderObj.stdWrap {
-					crop = 200|...|1
-					stripHtml = 1
-				}
+				renderObj.stdWrap.stripHtml = 1
+				stdWrap.crop = 400|...|1
 				stdWrap.stripHtml = 1
 			}
 
@@ -108,7 +111,7 @@ plugin.tx_gcblog_pi1 {
 				10{
 					field = starttime
 					ifEmpty.field = crdate
-					strftime = {$plugin.gc_blog.template.dateFormat}
+					strftime = {$plugin.gc_blog.dateFormat}
 					strftime.insertData = 1
 					noTrimWrap = |<p class="date">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.date}|</p>|
 					noTrimWrap.insertData = 1
@@ -126,7 +129,7 @@ plugin.tx_gcblog_pi1 {
 						noTrimWrap = |<p class="author">{LLL:EXT:gc_blog/pi1/locallang.xml:template.postList.author}|</p>|
 						noTrimWrap.insertData = 1
 						stdWrap.typolink{
-							parameter = {$plugin.gc_blog.template.listPage}
+							parameter = {$plugin.gc_blog.listPage}
 							parameter.insertData = 1
 							additionalParams = &tx_gcblog_pi1[author]={field:uid}
 							additionalParams.insertData = 1
@@ -163,7 +166,7 @@ plugin.tx_gcblog_pi1 {
 		markers {
             THUMBNAIL = HTML
             THUMBNAIL{
-                value = <img src="http://www.gravatar.com/avatar/{field:encodedEmail}?s={$plugin.gc_blog.template.commentThumbnailSize}&r=pg" alt=""/>
+                value = <img src="http://www.gravatar.com/avatar/{field:encodedEmail}?s={$plugin.gc_blog.commentThumbnailSize}&r=pg" alt=""/>
                 value.insertData = 1
             }
 
@@ -197,7 +200,7 @@ plugin.tx_gcblog_pi1 {
             DATE = TEXT
             DATE{
             	field = crdate
-				strftime = {$plugin.gc_blog.template.dateFormat}
+				strftime = {$plugin.gc_blog.dateFormat}
 				strftime.insertData = 1
 				wrap = <p class="date">|</p>
             }
