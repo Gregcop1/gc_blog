@@ -12,9 +12,9 @@ plugin.tx_gcblog_pi1 {
 		recursive.ifEmpty = 10
 
 		listPage = {$plugin.gc_blog.listPage}
-		category {
-			recursive = 100
-		}
+
+		category = sDEF|lDEF|category|vDEF
+		categoryRecursive = 100
 
 		templateFile = sDEF|lDEF|templateFile|vDEF
 		templateFile.ifEmpty = EXT:gc_blog/res/template.html

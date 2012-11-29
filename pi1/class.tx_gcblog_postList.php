@@ -61,7 +61,10 @@ class tx_gcblog_postList extends tx_gclib_list {
         $this->query['WHERE'] .= ' AND '.$this->tableName.'.doktype="'.$extConf['postCType'].'"';
 
         if($this->piVars['category']) {
-            $this->query['WHERE'] .= ' AND "'.$this->piVars['category'].'" in ('.$this->tableName.'.tx_gcblog_category)';
+            $this->config['category'] = $this->piVars['category'];
+        }
+        if($this->config['category']) {
+            $this->query['WHERE'] .= ' AND "'.$this->config['category'].'" in ('.$this->tableName.'.tx_gcblog_category)';
         }
 
         if($this->piVars['tag']) {

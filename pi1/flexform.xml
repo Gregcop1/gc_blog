@@ -41,6 +41,24 @@
 						</TCEforms>
 					</CODE>
 
+					<category>
+						<TCEforms>
+							<exclude>1</exclude>
+							<label>LLL:EXT:gc_blog/locallang_db.xml:tx_gcblog_categoryt</label>
+							<config>
+								<type>select</type>
+								<form_type>user</form_type>
+								<userFunc>tx_gclib_TCAform_selectTree->renderTreeFields</userFunc>
+								<foreign_table>tx_gcblog_category</foreign_table>
+								<back>pages</back>
+								<labelField>title</labelField>
+								<autoSizeMax>500</autoSizeMax>
+								<maxitems>500</maxitems>
+								<minitems>0</minitems>
+							</config>
+						</TCEforms>
+					</category>
+
 					<pages>
 						<TCEforms>
 							<exclude>1</exclude>
